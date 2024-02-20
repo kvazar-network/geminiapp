@@ -185,6 +185,15 @@ $server->setHandler(
                         $h1[] = $namespace;
                     }
 
+                    if ($part > 1)
+                    {
+                        $h1[] = sprintf(
+                            '%s %d',
+                            $config->geminiapp->string->part,
+                            $part
+                        );
+                    }
+
                     $h1[] = $config->geminiapp->string->title;
                 }
 
