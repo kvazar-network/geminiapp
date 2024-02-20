@@ -1,0 +1,57 @@
+{
+    "geminiapp":
+    {
+        "server":
+        {
+            "host":"127.0.0.1",
+            "port":1965
+        },
+        "pagination":
+        {
+            "limit":10
+        },
+        "links":
+        [
+            "https://github.com/kvazar-network/geminiapp GitHub"
+        ],
+        "string":
+        {
+            "title":"Kvazar",
+            "description":"Observe Kevacoin Universe",
+            "navigation":"Navigation",
+            "main":"Main",
+            "latest":"Latest",
+            "search":"Search",
+            "part":"Part",
+            "namespace":"Namespace",
+            "key":"Key",
+            "value":"Value",
+            "results":"Results",
+            "older":"Older",
+            "newer":"Newer",
+            "nothing":"Nothing"
+        }
+    },
+    "manticore":
+    {
+        "server":
+        {
+            "host":"127.0.0.1",
+            "port":9308
+        },
+        "index":
+        {
+            "document":{
+                "name":"kvazar",
+                "meta":
+                {
+                    "morphology":"stem_cz,stem_enru",
+                    "index_exact_words":1,
+                    "html_strip":1,
+                    "min_word_len":3,
+                    "min_prefix_len":3
+                }
+            }
+        }
+    }
+}
