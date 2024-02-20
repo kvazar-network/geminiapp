@@ -96,11 +96,7 @@ $server->setHandler(
                 );
 
                 $response->setMeta(
-                    sprintf(
-                        'gemini://%s%s/',
-                        $config->geminiapp->server->host,
-                        $config->geminiapp->server->port == 1965 ? null : ':' . $config->geminiapp->server->port
-                    )
+                    '/'
                 );
 
             break;
@@ -479,9 +475,7 @@ $server->setHandler(
 
                     $response->setMeta(
                         sprintf(
-                            'gemini://%s%s/?search=%s',
-                            $config->geminiapp->server->host,
-                            $config->geminiapp->server->port == 1965 ? null : ':' . $config->geminiapp->server->port,
+                            '/?search=%s',
                             $request->getQuery()
                         )
                     );
