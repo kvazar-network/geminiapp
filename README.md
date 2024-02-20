@@ -2,6 +2,12 @@
 
 [KevaCoin](https://github.com/kevacoin-project/) Explorer for [Gemini Protocol](https://geminiprotocol.net/)
 
+## Examples
+
+* `gemini://[301:23b4:991a:634d::db]` - [Yggdrasil](https://github.com/yggdrasil-network/)
+  * `gemini://kvazar.ygg` - [Alfis DNS](https://github.com/Revertron/Alfis)
+  * `gemini://kvazar.duckdns.org` - Clearnet
+
 ## Install
 
 1. `wget https://repo.manticoresearch.com/manticore-repo.noarch.deb`
