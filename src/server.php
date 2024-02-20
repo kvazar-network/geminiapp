@@ -156,11 +156,11 @@ $server->setHandler(
                 else if ($namespace)
                 {
                     // Find namespace alias
-                    if ($aliases = $index->get('_KEVA_NS', $filter))
+                    if ($aliases = $index->get('_KEVA_NS_', $filter))
                     {
                         foreach ($aliases as $alias)
                         {
-                            if ($alias['value'])
+                            if ($alias['key'] == '_KEVA_NS_')
                             {
                                 $h1[] = $alias['value'];
 
