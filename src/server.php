@@ -223,6 +223,8 @@ $server->setHandler(
 
                 else
                 {
+                    $result[] = '';
+
                     foreach ($config->geminiapp->links as $link)
                     {
                         $result[] = sprintf(
