@@ -159,8 +159,6 @@ $server->setHandler(
                             $part
                         );
                     }
-
-                    $h1[] = $config->geminiapp->string->title;
                 }
 
                 else if ($namespace)
@@ -193,8 +191,6 @@ $server->setHandler(
                             $part
                         );
                     }
-
-                    $h1[] = $config->geminiapp->string->title;
                 }
 
                 else
@@ -213,7 +209,6 @@ $server->setHandler(
                     else
                     {
                         $h1[] = $config->geminiapp->string->title;
-                        $h1[] = $config->geminiapp->string->description;
                     }
                 }
 
