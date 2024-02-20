@@ -268,13 +268,22 @@ $server->setHandler(
                     // Append latest records
                     foreach ($records as $record)
                     {
+                        // Key
                         $result[] = sprintf(
                             '### %s',
                             $record['key']
                         );
 
-                        $result[] = $record['value'];
+                        // Value
+                        $result[] = sprintf(
+                            '``` %s',
+                            $config->geminiapp->string->value
+                        );
 
+                        $result[] = $record['value'];
+                        $result[] = '```';
+
+                        // Link
                         $result[] = sprintf(
                             '=> /%s %s in %d',
                             $record['transaction'],
