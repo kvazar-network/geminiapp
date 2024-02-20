@@ -197,13 +197,13 @@ $server->setHandler(
                 {
                     if ($part > 1)
                     {
+                        $h1[] = $config->geminiapp->string->title;
+
                         $h1[] = sprintf(
                             '%s %d',
                             $config->geminiapp->string->part,
                             $part
                         );
-
-                        $h1[] = $config->geminiapp->string->title;
                     }
 
                     else
