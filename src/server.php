@@ -135,6 +135,16 @@ $server->setHandler(
                     $namespace = $ns[1];
                 }
 
+                if ($namespace)
+                {
+                    $filter =
+                    [
+                        'crc32_namespace' => crc32(
+                            $namespace
+                        )
+                    ];
+                }
+
                 // Build header
                 if ($search)
                 {
@@ -235,16 +245,6 @@ $server->setHandler(
                 }
 
                 // Get records
-                if ($namespace)
-                {
-                    $filter =
-                    [
-                        'crc32_namespace' => crc32(
-                            $namespace
-                        )
-                    ];
-                }
-
                 $records = $index->get(
                     $search,
                     $filter,
