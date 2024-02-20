@@ -2,7 +2,7 @@
 
 [KevaCoin](https://github.com/kevacoin-project/) Explorer for [Gemini Protocol](https://geminiprotocol.net/)
 
-## Examples
+## Live
 
 * `gemini://[301:23b4:991a:634d::db]` - [Yggdrasil](https://github.com/yggdrasil-network/)
   * `gemini://kvazar.ygg` - [Alfis DNS](https://github.com/Revertron/Alfis)
