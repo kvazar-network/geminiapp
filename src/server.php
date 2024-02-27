@@ -282,7 +282,22 @@ $server->setHandler(
                             $config->geminiapp->string->value
                         );
 
-                        $result[] = $record['value'];
+                        $lines = [];
+
+                        foreach ((array) explode(PHP_EOL, (string) $record['value']) as $line)
+                        {
+                            $lines[] = preg_replace(
+                                '/^```/',
+                                ' ```',
+                                $line
+                            );
+                        }
+
+                        $result[] = implode(
+                            PHP_EOL,
+                            $lines
+                        );
+
                         $result[] = '```';
 
                         // Link
