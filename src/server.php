@@ -285,9 +285,15 @@ $server->setHandler(
                         // Value
                         $result[] = null;
                         $result[] = trim(
-                            preg_replace( // remove extra breaks
-                                '/[\n\r]{3,}/',
-                                PHP_EOL . PHP_EOL,
+                            preg_replace(
+                                [
+                                    '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
+                                    '/[\n\r]{3,}/',           // remove extra breaks
+                                ],
+                                [
+                                    '$1 $2',
+                                    PHP_EOL . PHP_EOL,
+                                ],
                                 $record['value']
                             )
                         );
@@ -518,9 +524,15 @@ $server->setHandler(
 
                             // Value
                             $result[] = trim(
-                                preg_replace( // remove extra breaks
-                                    '/[\n\r]{3,}/',
-                                    PHP_EOL . PHP_EOL,
+                                preg_replace(
+                                    [
+                                        '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
+                                        '/[\n\r]{3,}/',           // remove extra breaks
+                                    ],
+                                    [
+                                        '$1 $2',
+                                        PHP_EOL . PHP_EOL,
+                                    ],
                                     $record['value']
                                 )
                             );
