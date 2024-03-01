@@ -28,7 +28,16 @@
             "results":"Results",
             "older":"Older",
             "newer":"Newer",
-            "nothing":"Nothing"
+            "nothing":"Nothing",
+            "block":"Block",
+            "time":"Time",
+            "data":"Data",
+            "meta":"Meta",
+            "view":
+            {
+                "raw":"Raw data",
+                "reader":"Reader"
+            }
         }
     },
     "manticore":

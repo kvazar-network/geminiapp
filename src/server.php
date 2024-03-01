@@ -273,34 +273,28 @@ $server->setHandler(
                         // Key
                         $result[] = sprintf(
                             '### %s',
-                            $record['key']
+                            trim(
+                                preg_replace( // single-line
+                                    '/[\s]+/',
+                                    ' ',
+                                    $record['key']
+                                )
+                            )
                         );
 
                         // Value
-                        $result[] = sprintf(
-                            '``` %s',
-                            $config->geminiapp->string->value
+                        $result[] = null;
+                        $result[] = trim(
+                            preg_replace( // remove extra breaks
+                                '/[\n\r]{3,}/',
+                                PHP_EOL . PHP_EOL,
+                                $record['value']
+                            )
                         );
-
-                        $lines = [];
-
-                        foreach ((array) explode(PHP_EOL, (string) $record['value']) as $line)
-                        {
-                            $lines[] = preg_replace(
-                                '/^```/',
-                                ' ```',
-                                $line
-                            );
-                        }
-
-                        $result[] = implode(
-                            PHP_EOL,
-                            $lines
-                        );
-
-                        $result[] = '```';
 
                         // Link
+                        $result[] = null;
+
                         $result[] = sprintf(
                             '=> /%s %s in %d',
                             $record['transaction'],
@@ -415,50 +409,158 @@ $server->setHandler(
                 ) {
                     if ($record['transaction'] == $attribute[1])
                     {
-                        // Header
-                        $result[] = sprintf(
-                            '# %s',
-                            $record['key']
-                        );
-
-                        // Body
-                        $result[] = sprintf(
-                            '``` %s',
-                            $config->geminiapp->string->value
-                        );
-
-                        $lines = [];
-
-                        foreach ((array) explode(PHP_EOL, (string) $record['value']) as $line)
+                        // Raw mode
+                        if ('raw' == $request->getQuery())
                         {
-                            $lines[] = preg_replace(
-                                '/^```/',
-                                ' ```',
-                                $line
+                            // Transaction ID
+                            $result[] = sprintf(
+                                '# %s',
+                                $record['transaction']
                             );
-                        }
 
-                        $result[] = implode(
-                            PHP_EOL,
-                            $lines
-                        );
+                            $result[] = sprintf(
+                                '## %s',
+                                $config->geminiapp->string->data
+                            );
 
-                        $result[] = '```';
+                            // Key
+                            $result[] = sprintf(
+                                '### %s',
+                                $config->geminiapp->string->key
+                            );
 
-                        $result[] = sprintf(
-                            '%s in %d',
-                            date(
+                            $result[] = '```';
+
+                            $lines = [];
+
+                            foreach ((array) explode(PHP_EOL, (string) $record['key']) as $line)
+                            {
+                                $lines[] = preg_replace(
+                                    '/^```/',
+                                    ' ```',
+                                    $line
+                                );
+                            }
+
+                            $result[] = implode(
+                                PHP_EOL,
+                                $lines
+                            );
+
+                            $result[] = '```';
+
+                            // Value
+                            $result[] = sprintf(
+                                '### %s',
+                                $config->geminiapp->string->value
+                            );
+
+                            $result[] = '```';
+
+                            $lines = [];
+
+                            foreach ((array) explode(PHP_EOL, (string) $record['value']) as $line)
+                            {
+                                $lines[] = preg_replace(
+                                    '/^```/',
+                                    ' ```',
+                                    $line
+                                );
+                            }
+
+                            $result[] = implode(
+                                PHP_EOL,
+                                $lines
+                            );
+
+                            $result[] = '```';
+
+                            // Meta
+                            $result[] = sprintf(
+                                '## %s',
+                                $config->geminiapp->string->meta
+                            );
+
+                            // Time
+                            $result[] = sprintf(
+                                '### %s',
+                                $config->geminiapp->string->time
+                            );
+
+                            $result[] = date(
                                 'Y-m-d',
                                 $record['time']
-                            ),
-                            $record['block']
-                        );
+                            );
+
+                            // Block
+                            $result[] = sprintf(
+                                '### %s',
+                                $config->geminiapp->string->block
+                            );
+
+                            $result[] = $record['block'];
+                        }
+
+                        // Reader mode
+                        else
+                        {
+                            // Key
+                            $result[] = sprintf(
+                                '# %s',
+                                trim(
+                                    preg_replace( // single-line
+                                        '/[\s]+/',
+                                        ' ',
+                                        $record['key']
+                                    )
+                                )
+                            );
+
+                            // Value
+                            $result[] = trim(
+                                preg_replace( // remove extra breaks
+                                    '/[\n\r]{3,}/',
+                                    PHP_EOL . PHP_EOL,
+                                    $record['value']
+                                )
+                            );
+
+                            // Time
+                            $result[] = null;
+
+                            $result[] = sprintf(
+                                '%s in %d',
+                                date(
+                                    'Y-m-d',
+                                    $record['time']
+                                ),
+                                $record['block']
+                            );
+                        }
 
                         // Footer
                         $result[] = sprintf(
                             '## %s',
                             $config->geminiapp->string->navigation
                         );
+
+                        if ('raw' == $request->getQuery())
+                        {
+                            $result[] = sprintf(
+                                '=> /%s %s',
+                                $record['transaction'],
+                                $config->geminiapp->string->view->reader
+                            );
+                        }
+
+                        else
+                        {
+                            $result[] = sprintf(
+                                '=> /%s?raw %s',
+                                $record['transaction'],
+                                $config->geminiapp->string->view->raw
+                            );
+                        }
 
                         $result[] = sprintf(
                             '=> /%s %s',
