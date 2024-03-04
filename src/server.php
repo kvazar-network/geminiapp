@@ -558,8 +558,8 @@ $server->setHandler(
                                 $result[] = trim(
                                     preg_replace(
                                         [
-                                            '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
-                                            '/[\n\r]{3,}/',           // remove extra breaks
+                                            '/^(^|\s+)(#|\*|```|=>)/', // escape gemini text
+                                            '/[\n\r]{3,}/',            // remove extra breaks
                                         ],
                                         [
                                             '$1 $2',
