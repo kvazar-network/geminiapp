@@ -554,33 +554,19 @@ $server->setHandler(
                                 );
 
                                 // Value
-                                $lines = [];
-
-                                foreach ((array) explode(PHP_EOL, (string) $record['value']) as $line)
-                                {
-                                    $lines[] = preg_replace(
-                                        [
-                                            '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
-                                        ],
-                                        [
-                                            '$1 $2',
-                                        ],
-                                        $line
-                                    );
-                                }
-
                                 $result[] = null;
                                 $result[] = trim(
                                     preg_replace(
                                         [
-                                            '/[\n\r]{3,}/', // remove extra breaks
+                                            '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
+                                            '/[\n\r]{3,}/',           // remove extra breaks
                                         ],
                                         [
+                                            '$1 $2',
                                             PHP_EOL . PHP_EOL,
                                         ],
-                                        implode(
-                                            PHP_EOL,
-                                            $lines
+                                        trim(
+                                            $record['value']
                                         )
                                     )
                                 );
