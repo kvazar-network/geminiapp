@@ -599,7 +599,6 @@ $server->setHandler(
                                     $config->geminiapp->string->view->gemtext
                                 );
 
-                                $result[] = null;
                                 $result[] = sprintf(
                                     '=> /%s %s',
                                     $record['transaction'],
@@ -617,7 +616,6 @@ $server->setHandler(
                                     $config->geminiapp->string->view->reader
                                 );
 
-                                $result[] = null;
                                 $result[] = sprintf(
                                     '=> /%s?raw %s',
                                     $record['transaction'],
@@ -635,7 +633,6 @@ $server->setHandler(
                                     $config->geminiapp->string->view->gemtext
                                 );
 
-                                $result[] = null;
                                 $result[] = sprintf(
                                     '=> /%s?raw %s',
                                     $record['transaction'],
