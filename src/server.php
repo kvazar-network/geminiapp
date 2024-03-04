@@ -392,149 +392,151 @@ $server->setHandler(
                 ) {
                     if ($record['transaction'] == $attribute[1])
                     {
-                        // Raw mode
-                        if ('raw' == $request->getQuery())
+                        // View mode
+                        switch ($request->getQuery())
                         {
-                            // Transaction ID
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '# %s',
-                                $record['transaction']
-                            );
+                            case 'raw':
 
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '## %s',
-                                $config->geminiapp->string->data
-                            );
-
-                            // Key
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '### %s',
-                                $config->geminiapp->string->key
-                            );
-
-                            $result[] = '```';
-
-                            $lines = [];
-
-                            foreach ((array) explode(PHP_EOL, (string) $record['key']) as $line)
-                            {
-                                $lines[] = preg_replace(
-                                    '/^```/',
-                                    ' ```',
-                                    $line
+                                // Transaction ID
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '# %s',
+                                    $record['transaction']
                                 );
-                            }
 
-                            $result[] = implode(
-                                PHP_EOL,
-                                $lines
-                            );
-
-                            $result[] = '```';
-
-                            // Value
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '### %s',
-                                $config->geminiapp->string->value
-                            );
-
-                            $result[] = '```';
-
-                            $lines = [];
-
-                            foreach ((array) explode(PHP_EOL, (string) $record['value']) as $line)
-                            {
-                                $lines[] = preg_replace(
-                                    '/^```/',
-                                    ' ```',
-                                    $line
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '## %s',
+                                    $config->geminiapp->string->data
                                 );
-                            }
 
-                            $result[] = implode(
-                                PHP_EOL,
-                                $lines
-                            );
+                                // Key
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '### %s',
+                                    $config->geminiapp->string->key
+                                );
 
-                            $result[] = '```';
+                                $result[] = '```';
 
-                            // Meta
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '## %s',
-                                $config->geminiapp->string->meta
-                            );
+                                $lines = [];
 
-                            // Time
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '### %s',
-                                $config->geminiapp->string->time
-                            );
+                                foreach ((array) explode(PHP_EOL, (string) $record['key']) as $line)
+                                {
+                                    $lines[] = preg_replace(
+                                        '/^```/',
+                                        ' ```',
+                                        $line
+                                    );
+                                }
 
-                            $result[] = null;
-                            $result[] = date(
-                                'Y-m-d',
-                                $record['time']
-                            );
+                                $result[] = implode(
+                                    PHP_EOL,
+                                    $lines
+                                );
 
-                            // Block
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '### %s',
-                                $config->geminiapp->string->block
-                            );
+                                $result[] = '```';
 
-                            $result[] = null;
-                            $result[] = $record['block'];
-                        }
+                                // Value
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '### %s',
+                                    $config->geminiapp->string->value
+                                );
 
-                        // Reader mode
-                        else
-                        {
-                            // Key
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '# %s',
-                                trim(
-                                    preg_replace( // single-line
-                                        '/[\s]+/',
-                                        ' ',
-                                        $record['key']
-                                    )
-                                )
-                            );
+                                $result[] = '```';
 
-                            // Value
-                            $result[] = null;
-                            $result[] = trim(
-                                preg_replace(
-                                    [
-                                        '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
-                                        '/[\n\r]{3,}/',           // remove extra breaks
-                                    ],
-                                    [
-                                        '$1 $2',
-                                        PHP_EOL . PHP_EOL,
-                                    ],
-                                    $record['value']
-                                )
-                            );
+                                $lines = [];
 
-                            // Time
-                            $result[] = null;
-                            $result[] = sprintf(
-                                '%s in %d',
-                                date(
+                                foreach ((array) explode(PHP_EOL, (string) $record['value']) as $line)
+                                {
+                                    $lines[] = preg_replace(
+                                        '/^```/',
+                                        ' ```',
+                                        $line
+                                    );
+                                }
+
+                                $result[] = implode(
+                                    PHP_EOL,
+                                    $lines
+                                );
+
+                                $result[] = '```';
+
+                                // Meta
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '## %s',
+                                    $config->geminiapp->string->meta
+                                );
+
+                                // Time
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '### %s',
+                                    $config->geminiapp->string->time
+                                );
+
+                                $result[] = null;
+                                $result[] = date(
                                     'Y-m-d',
                                     $record['time']
-                                ),
-                                $record['block']
-                            );
+                                );
+
+                                // Block
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '### %s',
+                                    $config->geminiapp->string->block
+                                );
+
+                                $result[] = null;
+                                $result[] = $record['block'];
+
+                            break;
+
+                            default:
+
+                                // Key
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '# %s',
+                                    trim(
+                                        preg_replace( // single-line
+                                            '/[\s]+/',
+                                            ' ',
+                                            $record['key']
+                                        )
+                                    )
+                                );
+
+                                // Value
+                                $result[] = null;
+                                $result[] = trim(
+                                    preg_replace(
+                                        [
+                                            '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
+                                            '/[\n\r]{3,}/',           // remove extra breaks
+                                        ],
+                                        [
+                                            '$1 $2',
+                                            PHP_EOL . PHP_EOL,
+                                        ],
+                                        $record['value']
+                                    )
+                                );
+
+                                // Time
+                                $result[] = null;
+                                $result[] = sprintf(
+                                    '%s in %d',
+                                    date(
+                                        'Y-m-d',
+                                        $record['time']
+                                    ),
+                                    $record['block']
+                                );
                         }
 
                         // Footer
