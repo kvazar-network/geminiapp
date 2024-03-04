@@ -212,6 +212,7 @@ $server->setHandler(
                     }
                 }
 
+                $result[] = null;
                 $result[] = sprintf(
                     '# %s',
                     implode(
@@ -221,6 +222,7 @@ $server->setHandler(
                 );
 
                 // Menu
+                $result[] = null;
                 $result[] = sprintf(
                     '=> /search %s',
                     $config->geminiapp->string->search
@@ -423,17 +425,20 @@ $server->setHandler(
                         if ('raw' == $request->getQuery())
                         {
                             // Transaction ID
+                            $result[] = null;
                             $result[] = sprintf(
                                 '# %s',
                                 $record['transaction']
                             );
 
+                            $result[] = null;
                             $result[] = sprintf(
                                 '## %s',
                                 $config->geminiapp->string->data
                             );
 
                             // Key
+                            $result[] = null;
                             $result[] = sprintf(
                                 '### %s',
                                 $config->geminiapp->string->key
@@ -460,6 +465,7 @@ $server->setHandler(
                             $result[] = '```';
 
                             // Value
+                            $result[] = null;
                             $result[] = sprintf(
                                 '### %s',
                                 $config->geminiapp->string->value
@@ -486,28 +492,33 @@ $server->setHandler(
                             $result[] = '```';
 
                             // Meta
+                            $result[] = null;
                             $result[] = sprintf(
                                 '## %s',
                                 $config->geminiapp->string->meta
                             );
 
                             // Time
+                            $result[] = null;
                             $result[] = sprintf(
                                 '### %s',
                                 $config->geminiapp->string->time
                             );
 
+                            $result[] = null;
                             $result[] = date(
                                 'Y-m-d',
                                 $record['time']
                             );
 
                             // Block
+                            $result[] = null;
                             $result[] = sprintf(
                                 '### %s',
                                 $config->geminiapp->string->block
                             );
 
+                            $result[] = null;
                             $result[] = $record['block'];
                         }
 
@@ -515,6 +526,7 @@ $server->setHandler(
                         else
                         {
                             // Key
+                            $result[] = null;
                             $result[] = sprintf(
                                 '# %s',
                                 trim(
@@ -527,6 +539,7 @@ $server->setHandler(
                             );
 
                             // Value
+                            $result[] = null;
                             $result[] = trim(
                                 preg_replace(
                                     [
@@ -543,6 +556,7 @@ $server->setHandler(
 
                             // Time
                             $result[] = null;
+                            $result[] = null;
 
                             $result[] = sprintf(
                                 '%s in %d',
@@ -555,6 +569,7 @@ $server->setHandler(
                         }
 
                         // Footer
+                        $result[] = null;
                         $result[] = sprintf(
                             '## %s',
                             $config->geminiapp->string->navigation
@@ -562,6 +577,7 @@ $server->setHandler(
 
                         if ('raw' == $request->getQuery())
                         {
+                            $result[] = null;
                             $result[] = sprintf(
                                 '=> /%s %s',
                                 $record['transaction'],
@@ -571,6 +587,7 @@ $server->setHandler(
 
                         else
                         {
+                            $result[] = null;
                             $result[] = sprintf(
                                 '=> /%s?raw %s',
                                 $record['transaction'],
