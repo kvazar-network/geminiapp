@@ -273,10 +273,14 @@ $server->setHandler(
                     // Append latest records
                     foreach ($records as $record)
                     {
-                        // Key
-                        $result[] = null;
+                        // Link
                         $result[] = sprintf(
-                            '### %s',
+                            '=> /%s %s %s',
+                            $record['transaction'],
+                            date(
+                                'Y-m-d',
+                                $record['time']
+                            ),
                             trim(
                                 preg_replace( // single-line
                                     '/[\s]+/',
@@ -285,42 +289,9 @@ $server->setHandler(
                                 )
                             )
                         );
-
-                        // Value
-                        $result[] = null;
-                        $result[] = trim(
-                            preg_replace(
-                                [
-                                    '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
-                                    '/[\n\r]{3,}/',           // remove extra breaks
-                                ],
-                                [
-                                    '$1 $2',
-                                    PHP_EOL . PHP_EOL,
-                                ],
-                                $record['value']
-                            )
-                        );
-
-                        // Link
-                        $result[] = null;
-                        $result[] = sprintf(
-                            '=> /%s %s in %d',
-                            $record['transaction'],
-                            date(
-                                'Y-m-d',
-                                $record['time']
-                            ),
-                            $record['block']
-                        );
                     }
 
                     // Append navigation
-                    $result[] = null;
-                    $result[] = sprintf(
-                        '## %s',
-                        $config->geminiapp->string->navigation
-                    );
                     $result[] = null;
 
                     // Pagination
