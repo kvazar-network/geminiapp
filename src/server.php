@@ -496,48 +496,6 @@ $server->setHandler(
 
                             break;
 
-                            case 'gemtext':
-
-                                // Key
-                                $result[] = null;
-                                $result[] = sprintf(
-                                    '# %s',
-                                    trim(
-                                        preg_replace( // single-line
-                                            '/[\s]+/',
-                                            ' ',
-                                            $record['key']
-                                        )
-                                    )
-                                );
-
-                                // Value
-                                $result[] = null;
-                                $result[] = trim(
-                                    preg_replace(
-                                        [
-                                            '/[\n\r]{3,}/', // remove extra breaks
-                                        ],
-                                        [
-                                            PHP_EOL . PHP_EOL,
-                                        ],
-                                        $record['value']
-                                    )
-                                );
-
-                                // Time
-                                $result[] = null;
-                                $result[] = sprintf(
-                                    '%s in %d',
-                                    date(
-                                        'Y-m-d',
-                                        $record['time']
-                                    ),
-                                    $record['block']
-                                );
-
-                            break;
-
                             default:
 
                                 // Key
@@ -558,8 +516,8 @@ $server->setHandler(
                                 $result[] = trim(
                                     preg_replace(
                                         [
-                                            '/(^|\s+)(#|\*|```|=>)/', // escape gemini text
-                                            '/[\n\r]{3,}/',           // remove extra breaks
+                                            '/(^|\s+)(#|##)/', // escape h1, h2, hashtags
+                                            '/[\n\r]{3,}/',    // remove extra breaks
                                         ],
                                         [
                                             '$1 $2',
@@ -596,32 +554,9 @@ $server->setHandler(
 
                                 $result[] = null;
                                 $result[] = sprintf(
-                                    '=> /%s?gemtext %s',
-                                    $record['transaction'],
-                                    $config->geminiapp->string->view->gemtext
-                                );
-
-                                $result[] = sprintf(
                                     '=> /%s %s',
                                     $record['transaction'],
                                     $config->geminiapp->string->view->reader
-                                );
-
-                            break;
-
-                            case 'gemtext':
-
-                                $result[] = null;
-                                $result[] = sprintf(
-                                    '=> /%s %s',
-                                    $record['transaction'],
-                                    $config->geminiapp->string->view->reader
-                                );
-
-                                $result[] = sprintf(
-                                    '=> /%s?raw %s',
-                                    $record['transaction'],
-                                    $config->geminiapp->string->view->raw
                                 );
 
                             break;
@@ -629,12 +564,6 @@ $server->setHandler(
                             default:
 
                                 $result[] = null;
-                                $result[] = sprintf(
-                                    '=> /%s?gemtext %s',
-                                    $record['transaction'],
-                                    $config->geminiapp->string->view->gemtext
-                                );
-
                                 $result[] = sprintf(
                                     '=> /%s?raw %s',
                                     $record['transaction'],
