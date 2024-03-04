@@ -36,7 +36,8 @@
             "view":
             {
                 "raw":"Raw data",
-                "reader":"Reader"
+                "reader":"Reader",
+                "gemtext":"Gemtext"
             }
         }
     },
