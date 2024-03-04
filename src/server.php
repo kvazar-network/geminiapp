@@ -527,8 +527,6 @@ $server->setHandler(
 
                             // Time
                             $result[] = null;
-                            $result[] = null;
-
                             $result[] = sprintf(
                                 '%s in %d',
                                 date(
