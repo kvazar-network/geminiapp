@@ -237,7 +237,7 @@ $server->setHandler(
 
                 else
                 {
-                    $result[] = '';
+                    $result[] = null;
 
                     foreach ($config->geminiapp->links as $link)
                     {
@@ -260,6 +260,7 @@ $server->setHandler(
                 );
 
                 // Append h2
+                $result[] = null;
                 $result[] = sprintf(
                     '## %s',
                     $search ? $config->geminiapp->string->results : $config->geminiapp->string->latest
@@ -271,6 +272,7 @@ $server->setHandler(
                     foreach ($records as $record)
                     {
                         // Key
+                        $result[] = null;
                         $result[] = sprintf(
                             '### %s',
                             trim(
@@ -300,7 +302,6 @@ $server->setHandler(
 
                         // Link
                         $result[] = null;
-
                         $result[] = sprintf(
                             '=> /%s %s in %d',
                             $record['transaction'],
@@ -313,10 +314,12 @@ $server->setHandler(
                     }
 
                     // Append navigation
+                    $result[] = null;
                     $result[] = sprintf(
                         '## %s',
                         $config->geminiapp->string->navigation
                     );
+                    $result[] = null;
 
                     // Pagination
                     $older = [];
@@ -382,6 +385,7 @@ $server->setHandler(
 
                 else
                 {
+                    $result[] = null;
                     $result[] = $config->geminiapp->string->nothing;
                 }
 
