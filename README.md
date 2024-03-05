@@ -2,6 +2,8 @@
 
 [KevaCoin](https://github.com/kevacoin-project/) Explorer for [Gemini Protocol](https://geminiprotocol.net/)
 
+![kvazar-geminiapp](https://github.com/kvazar-network/geminiapp/assets/108541346/16c26359-c122-4b7d-819a-33c1fb86efec)
+
 ## Live
 
 * `gemini://[301:23b4:991a:634d::db]` - [Yggdrasil](https://github.com/yggdrasil-network/)
