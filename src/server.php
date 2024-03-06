@@ -270,6 +270,8 @@ $server->setHandler(
 
                 if ($records)
                 {
+                    $result[] = null;
+
                     // Append latest records
                     foreach ($records as $record)
                     {
