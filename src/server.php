@@ -223,10 +223,6 @@ $server->setHandler(
 
                 // Menu
                 $result[] = null;
-                $result[] = sprintf(
-                    '=> /search %s',
-                    $config->geminiapp->string->search
-                );
 
                 // Append links
                 if ($namespace || $search || $part > 1)
@@ -249,6 +245,11 @@ $server->setHandler(
                         );
                     }
                 }
+
+                $result[] = sprintf(
+                    '=> /search %s',
+                    $config->geminiapp->string->search
+                );
 
                 // Get records
                 $records = $index->get(
