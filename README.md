@@ -34,6 +34,15 @@ To update index, use [crawler](https://github.com/kvazar-network/crawler)
 
 `php src/server.php 127.0.0.1`
 
+When launching server with systemd, just make sure that manticore service already running:
+
+```
+[Unit]
+Wants=manticore.service
+After=manticore.service
+...
+```
+
 ## Update
 
 1. `cd geminiapp`
